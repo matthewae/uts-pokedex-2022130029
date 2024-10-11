@@ -12,16 +12,16 @@
 
     <style>
         body {
-            background: linear-gradient(to right, #a8e0f5, #f4c9ff); /* Latar belakang gradien */
-            font-family: 'Comic Sans MS', cursive, sans-serif; /* Font playful */
-            color: #333; /* Warna teks */
+            background: linear-gradient(to right, #a8e0f5, #f4c9ff);
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #333;
         }
 
         .card {
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             border-radius: 20px;
-            border: 2px solid #ffcc00; /* Border kuning untuk tampilan Pokémon */
-            background: rgba(255, 255, 255, 0.9); /* Efek transparan */
+            border: 2px solid #ffcc00;
+            background: rgba(255, 255, 255, 0.9);
         }
 
         .form-section {
@@ -29,49 +29,49 @@
         }
 
         .form-section h5 {
-            background-color: #28a745; /* Warna hijau Pokémon */
+            background-color: #28a745;
             color: white;
             padding: 10px;
             border-radius: 10px;
-            text-align: center; /* Memusatkan teks */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Bayangan */
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .btn-primary {
-            background-color: #ff6347; /* Merah cerah untuk tombol */
+            background-color: #ff6347;
             border: none;
-            border-radius: 10px; /* Sudut membulat */
-            transition: background-color 0.3s, transform 0.3s; /* Efek transisi */
+            border-radius: 10px;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
         .btn-primary:hover {
-            background-color: #ff4500; /* Warna hover */
-            transform: scale(1.05); /* Efek zoom */
+            background-color: #ff4500;
+            transform: scale(1.05);
         }
 
         .btn-secondary {
             background-color: #6c757d;
             border: none;
-            border-radius: 10px; /* Sudut membulat */
-            transition: background-color 0.3s, transform 0.3s; /* Efek transisi */
+            border-radius: 10px;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
         .btn-secondary:hover {
             background-color: #5a6268;
-            transform: scale(1.05); /* Efek zoom */
+            transform: scale(1.05);
         }
 
         .file-upload {
             margin-top: 10px;
-            position: relative; /* Posisi relatif untuk elemen anak */
+            position: relative;
         }
 
         .file-upload input {
             padding: 5px;
-            border-radius: 10px; /* Sudut membulat */
-            border: 2px dashed #ff6347; /* Border dashed untuk input file */
+            border-radius: 10px;
+            border: 2px dashed #ff6347;
             width: 100%;
-            cursor: pointer; /* Tampilkan pointer pada hover */
+            cursor: pointer;
         }
 
         .preview-image {
@@ -79,16 +79,16 @@
             height: auto;
             margin-top: 10px;
             border-radius: 10px;
-            display: none; /* Sembunyikan gambar awal */
-            border: 2px solid #ff6347; /* Border untuk gambar */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bayangan */
+            display: none;
+            border: 2px solid #ff6347;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .file-name {
             margin-top: 5px;
             font-size: 14px;
             color: #6c757d;
-            font-weight: bold; /* Tebal untuk nama file */
+            font-weight: bold;
         }
 
         .alert-danger {

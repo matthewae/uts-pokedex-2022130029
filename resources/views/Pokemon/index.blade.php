@@ -17,7 +17,7 @@
         .card {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin: 0 auto;
-            width: 100%; /* Make the card full width */
+            width: 100%;
         }
 
         .card-header {
@@ -35,14 +35,14 @@
         }
 
         table.table {
-            table-layout: auto; /* Change to auto for better column width adjustment */
+            table-layout: auto;
             word-wrap: break-word;
-            width: 100%; /* Ensure table takes full width of card */
+            width: 100%;
         }
 
         th, td {
             vertical-align: middle !important;
-            text-align: center; /* Center align text in the table */
+            text-align: center;
         }
 
         .col-photo {
@@ -50,14 +50,14 @@
         }
 
         .col-actions {
-            width: 220px; /* Increased width for actions column */
+            width: 220px;
         }
 
         .btn-group {
             display: flex;
-            justify-content: center; /* Center action buttons */
-            flex-direction: row; /* Ensure buttons are in a row */
-            gap: 5px; /* Add space between buttons */
+            justify-content: center;
+            flex-direction: row;
+            gap: 5px;
         }
 
         .table-scroll {
