@@ -16,18 +16,11 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-// Rute untuk otentikasi
 Auth::routes();
 
-// Rute untuk halaman home setelah login
+Route::get('/', [PokemonController::class, 'main'])->name('main');
+
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-// Rute sumber daya untuk Pokémon
 Route::resource('pokemons', PokemonController::class);
-Route::get('/pokemon/{id}', [PokemonController::class, 'show'])->name('pokemon.show');
 

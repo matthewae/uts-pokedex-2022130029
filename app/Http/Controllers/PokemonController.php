@@ -4,34 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Models\Pokemon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage; // Import Storage facade
 
 class PokemonController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('show');
+        $this->middleware('auth')->except('index', 'show');
     }
 
-    /**
-     * Display a listing of the resource.
-     */
+    public function main()
+    {
+        $pokemons = Pokemon::paginate(9);
+        return view('main', compact('pokemons'));
+    }
+
     public function index()
     {
-        $pokemons = Pokemon::paginate(10);
+        $pokemons = Pokemon::paginate(20);
         return view('pokemon.index', compact('pokemons'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('pokemon.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -48,35 +46,27 @@ class PokemonController extends Controller
         ]);
 
         if ($request->hasFile('photo')) {
-            $filePath = $request->file('photo')->store('photos', 'public');
-            $validatedData['photo'] = $filePath;
+            $file = $request->file('photo');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('photos', $filename, 'public');
+            $validatedData['photo'] = $path;
         }
-
 
         Pokemon::create($validatedData);
 
         return redirect()->route('pokemons.index')->with('success', 'Pokemon created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Pokemon $pokemon)
     {
         return view('pokemon.show', compact('pokemon'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Pokemon $pokemon)
     {
         return view('pokemon.edit', compact('pokemon'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Pokemon $pokemon)
     {
         $validatedData = $request->validate([
@@ -92,10 +82,11 @@ class PokemonController extends Controller
             'photo' => 'nullable|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
         ]);
 
-
         if ($request->hasFile('photo')) {
-            $filePath = $request->file('photo')->store('photos', 'public');
-            $validatedData['photo'] = $filePath;
+            $file = $request->file('photo');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('photos', $filename, 'public');
+            $validatedData['photo'] = $path;
         }
 
         $pokemon->update($validatedData);
@@ -103,11 +94,16 @@ class PokemonController extends Controller
         return redirect()->route('pokemons.index')->with('success', 'Pokemon updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Pokemon $pokemon)
     {
+        // Optional: Remove photo from storage if it exists
+        if ($pokemon->photo) {
+            // Check if the file exists before trying to delete it
+            if (Storage::disk('public')->exists($pokemon->photo)) {
+                Storage::disk('public')->delete($pokemon->photo);
+            }
+        }
+
         $pokemon->delete();
         return redirect()->route('pokemons.index')->with('success', 'Pokemon deleted successfully.');
     }
