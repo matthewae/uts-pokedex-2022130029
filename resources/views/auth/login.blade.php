@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
 
-        <!-- Bagian gambar login -->
+        
         <div class="col-md-6 d-none d-md-block">
             <img src="{{ asset('storage/logo/pngegg.png') }}" alt="Login Image" class="img-fluid" style="border-radius: 10px;">
         </div>

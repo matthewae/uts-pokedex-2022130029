@@ -90,28 +90,27 @@
         }
 
         .pagination .page-link {
-    padding: 6px 12px;  /* Mengatur ukuran padding yang lebih kecil */
-    font-size: 0.75rem;  /* Mengurangi ukuran font */
-}
+            padding: 6px 12px;
+            font-size: 0.75rem;
 
-.pagination .page-item.active .page-link {
-    background-color: #007bff;
-    border-color: #007bff;
-    color: white;
-}
+            .pagination .page-item.active .page-link {
+                background-color: #007bff;
+                border-color: #007bff;
+                color: white;
+            }
 
-.pagination .page-link:hover {
-    background-color: #0056b3;
-    color: white;
-}
-
+            .pagination .page-link:hover {
+                background-color: #0056b3;
+                color: white;
+            }
     </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Pokemon</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -127,13 +126,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <i class="fas fa-sign-out-alt"></i> Logout
+                            <i align class="fas fa-sign-out-alt"></i> Logout
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
                     </li>
-            </ul>
+                </ul>
         </div>
     </nav>
 
@@ -168,43 +167,47 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($pokemons as $pokemon)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $pokemon->name }}</td>
-                    <td>{{ $pokemon->species }}</td>
-                    <td>{{ $pokemon->primary_type }}</td>
-                    <td>{{ number_format($pokemon->weight, 2) }}</td>
-                    <td>{{ number_format($pokemon->height, 2) }}</td>
-                    <td>{{ $pokemon->hp }}</td>
-                    <td>{{ $pokemon->attack }}</td>
-                    <td>{{ $pokemon->defense }}</td>
-                    <td>{{ $pokemon->is_legendary ? 'Yes' : 'No' }}</td>
-                    <td>
-                        @if($pokemon->photo)
-                            <img src="{{ Storage::url($pokemon->photo) }}" class="img-thumbnail" alt="Pokemon Photo">
-                        @else
-                            No image
-                        @endif
-                    </td>
-                    <td>
-                        <div class="btn-group">
-                            <a href="{{ route('pokemons.edit', $pokemon->id) }}" class="btn btn-warning btn-sm" title="Edit">
-                                <i class="fas fa-edit"></i> Edit
-                            </a>
-                            <a href="{{ route('pokemons.show', $pokemon->id) }}" class="btn btn-info btn-sm" title="View">
-                                <i class="fas fa-eye"></i> View
-                            </a>
-                            <form action="{{ route('pokemons.destroy', $pokemon->id) }}" method="POST" class="delete-form">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" title="Delete">
-                                    <i class="fas fa-trash"></i> Delete
-                                </button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
+                @foreach ($pokemons as $pokemon)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $pokemon->name }}</td>
+                        <td>{{ $pokemon->species }}</td>
+                        <td>{{ $pokemon->primary_type }}</td>
+                        <td>{{ number_format($pokemon->weight, 2) }}</td>
+                        <td>{{ number_format($pokemon->height, 2) }}</td>
+                        <td>{{ $pokemon->hp }}</td>
+                        <td>{{ $pokemon->attack }}</td>
+                        <td>{{ $pokemon->defense }}</td>
+                        <td>{{ $pokemon->is_legendary ? 'Yes' : 'No' }}</td>
+                        <td>
+                            @if ($pokemon->photo)
+                                <img src="{{ Storage::url($pokemon->photo) }}" class="img-thumbnail"
+                                    alt="Pokemon Photo">
+                            @else
+                                No image
+                            @endif
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="{{ route('pokemons.edit', $pokemon->id) }}" class="btn btn-warning btn-sm"
+                                    title="Edit">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <a href="{{ route('pokemons.show', $pokemon->id) }}" class="btn btn-info btn-sm"
+                                    title="View">
+                                    <i class="fas fa-eye"></i> View
+                                </a>
+                                <form action="{{ route('pokemons.destroy', $pokemon->id) }}" method="POST"
+                                    class="delete-form">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" title="Delete">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
@@ -224,7 +227,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
 
     <script>
-
         document.querySelectorAll('.delete-form').forEach(form => {
             form.addEventListener('submit', function(event) {
                 event.preventDefault();
@@ -245,7 +247,7 @@
                 });
             });
         });
-        {{$pokemons->links()}}
+        {{ $pokemons->links() }}
     </script>
 </body>
 
