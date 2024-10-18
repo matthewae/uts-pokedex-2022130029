@@ -124,49 +124,4 @@
 </html>
 
 
-{{-- @extends('layouts.app')
 
-@section('title', 'Pokedex')
-
-@section('content')
-    <div class="container mt-5">
-        <h1 class="text-center mb-5">Pokedex</h1>
-
-        @if ($pokemons->count() > 0)
-            <div class="row">
-                @foreach ($pokemons as $pokemon)
-                    <div class="col-md-4 mb-4">
-                        <!-- Card Pokémon baru dengan layout sesuai yang diminta -->
-                        <div class="pokemon-card">
-                            <a href="{{ route('pokemons.show', $pokemon->id) }}">
-                                <!-- Gambar Pokémon -->
-                                <img src="{{ $pokemon->photo ? asset('storage/' . $pokemon->photo) : 'https://placehold.co/200' }}"
-                                     class="pokemon-image"
-                                     alt="{{ $pokemon->name }}">
-                            </a>
-
-                            <!-- ID Pokémon -->
-                            <div class="pokemon-id">#{{ str_pad($pokemon->id, 4, '0', STR_PAD_LEFT) }}</div>
-
-                            <!-- Nama Pokémon -->
-                            <div class="pokemon-name">{{ $pokemon->name }}</div>
-
-                            <!-- Primary Type -->
-                            <div class="pokemon-type">{{ $pokemon->primary_type }}</div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-
-            <div class="d-flex justify-content-center mt-4">
-                {{ $pokemons->links() }}
-            </div>
-        @else
-            <p class="text-center">No Pokémon available.</p>
-        @endif
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-beta3/js/bootstrap.min.js"></script>
-@endsection --}}
