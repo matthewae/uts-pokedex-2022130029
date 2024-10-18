@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pokemon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage; 
+use Illuminate\Support\Facades\Storage;
 
 class PokemonController extends Controller
 {
@@ -83,6 +83,10 @@ class PokemonController extends Controller
         ]);
 
         if ($request->hasFile('photo')) {
+            if ($pokemon->photo && Storage::disk('public')->exists($pokemon->photo)) {
+                Storage::disk('public')->delete($pokemon->photo);
+            }
+
             $file = $request->file('photo');
             $filename = time() . '_' . $file->getClientOriginalName();
             $path = $file->storeAs('photos', $filename, 'public');
@@ -96,9 +100,7 @@ class PokemonController extends Controller
 
     public function destroy(Pokemon $pokemon)
     {
-        // Optional: Remove photo from storage if it exists
         if ($pokemon->photo) {
-            // Check if the file exists before trying to delete it
             if (Storage::disk('public')->exists($pokemon->photo)) {
                 Storage::disk('public')->delete($pokemon->photo);
             }

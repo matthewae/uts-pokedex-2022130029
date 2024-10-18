@@ -11,40 +11,39 @@
                 @foreach ($pokemons as $pokemon)
                     <div class="col-md-4 mb-4">
                         <div class="pokemon-card">
-                            @if ($pokemon->photo)
                             <a href="{{ route('pokemons.show', $pokemon) }}">
-                                <img src="{{ Storage::url($pokemon->photo) ?? 'https://placehold.co/200' }}"
-                                    class="img-thumbnail w-100">
+                                <img src="{{ $pokemon->photo ? Storage::url($pokemon->photo) : asset('https://placehold.co/200') }}"
+                                    class="pokemon-image">
                             </a>
-                        @else
-                            <a href="{{ route('pokemons.show', $pokemon) }}">
-                                <img src="https://placehold.co/200" class="img-thumbnail w-100">
-                            </a>
-                        @endif
 
                             <div class="pokemon-id">#{{ str_pad($pokemon->id, 4, '0', STR_PAD_LEFT) }}</div>
                             <div class="pokemon-name">{{ $pokemon->name }}</div>
+
+                            @php
+                                $typeColors = [
+                                    'Grass' => '#78C850',
+                                    'Fire' => '#F08030',
+                                    'Water' => '#6890F0',
+                                    'Bug' => '#A8B820',
+                                    'Normal' => '#A8A878',
+                                    'Poison' => '#A040A0',
+                                    'Electric' => '#F8D030',
+                                    'Ground' => '#E0C068',
+                                    'Fairy' => '#EE99AC',
+                                    'Fighting' => '#C03028',
+                                    'Psychic' => '#F85888',
+                                    'Rock' => '#B8A038',
+                                    'Ghost' => '#705898',
+                                    'Ice' => '#98D8D8',
+                                    'Dragon' => '#7038F8',
+                                    'Dark' => '#705848',
+                                    'Steel' => '#B8B8D0',
+                                    'Flying' => '#A890F0',
+                                ];
+                            @endphp
+
                             <div class="pokemon-type"
-                                style="background-color:
-                                @if ($pokemon->primary_type == 'Grass') #78C850
-                                @elseif($pokemon->primary_type == 'Fire') #F08030
-                                @elseif($pokemon->primary_type == 'Water') #6890F0
-                                @elseif($pokemon->primary_type == 'Bug') #A8B820
-                                @elseif($pokemon->primary_type == 'Normal') #A8A878
-                                @elseif($pokemon->primary_type == 'Poison') #A040A0
-                                @elseif($pokemon->primary_type == 'Electric') #F8D030
-                                @elseif($pokemon->primary_type == 'Ground') #E0C068
-                                @elseif($pokemon->primary_type == 'Fairy') #EE99AC
-                                @elseif($pokemon->primary_type == 'Fighting') #C03028
-                                @elseif($pokemon->primary_type == 'Psychic') #F85888
-                                @elseif($pokemon->primary_type == 'Rock') #B8A038
-                                @elseif($pokemon->primary_type == 'Ghost') #705898
-                                @elseif($pokemon->primary_type == 'Ice') #98D8D8
-                                @elseif($pokemon->primary_type == 'Dragon') #7038F8
-                                @elseif($pokemon->primary_type == 'Dark') #705848
-                                @elseif($pokemon->primary_type == 'Steel') #B8B8D0
-                                @elseif($pokemon->primary_type == 'Flying') #A890F0
-                                @else #000000 @endif;">
+                                style="background-color: {{ $typeColors[$pokemon->primary_type] ?? '#000000' }}">
                                 {{ $pokemon->primary_type }}
                             </div>
                         </div>
@@ -102,12 +101,5 @@
             border-radius: 15px;
             display: inline-block;
         }
-
-        {{$pokemons->links()}}
     </style>
-    
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-beta3/js/bootstrap.min.js"></script>
 @endsection
